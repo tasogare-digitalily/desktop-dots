@@ -1,0 +1,66 @@
+@import url('/home/digitalily/.cache/wal/colors-waybar.css');
+
+@define-color mauve  @color9;
+@define-color red  @color9;
+@define-color lavender  @color7;
+@define-color text  @color7;
+@keyframes fadeIn {
+    0% {
+    }
+    100% {
+    }
+}
+
+* {
+    all:unset;
+    font-family: 'Noto Sans CJK JP, CodeNewRoman Nerd Font Mono', monospace;
+    font-size: 12px;
+    outline: none;
+    border: none;
+}
+
+window {
+    all:unset;
+    border-radius: 0px;
+    background: alpha(@background,.4);
+}
+#inner-box {
+    margin: 2px;
+    border: none;
+}
+#outer-box {    
+    border: none;
+}
+#text {
+    border: none;
+    color: @text;
+    outline: none;
+}
+#entry {
+    border: none;
+    margin: 5px;
+}
+#entry arrow {
+    border: none;
+    color: @lavender;
+
+}
+/* this doesn't work for some reason :/ */
+#entry:hover {
+    color: alpha(@color5, 1);
+    border: none;
+    text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
+    transition: all 1s ease;
+}
+#entry:selected {
+    box-shadow: 1px 1px 5px rgba(255,255,255, .03);
+    border: none;
+    border-radius: 20px;
+    background-color:transparent;
+}
+#entry:selected #text {
+    color: @mauve;
+}
+#entry:drop(active) {
+    background-color: @lavender !important;
+}
