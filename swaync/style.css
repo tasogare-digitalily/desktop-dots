@@ -30,7 +30,7 @@
 .floating-notifications.background .notification-background .notification .notification-content {
 }
 .notification{
-    background: alpha(@mycolor,.2);
+    background: alpha(@mycolor,.7);
 }
 
 .control-center .notification-row .notification-background .notification {
@@ -41,7 +41,8 @@
 }
 .floating-notifications .notification{
     animation: fadeIn .5s ease-in-out;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    margin-left: 5px;
 }
 
 .control-center .notification-row .notification-background .notification box,
