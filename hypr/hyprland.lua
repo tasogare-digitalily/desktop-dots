@@ -130,9 +130,9 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("pactl set-sink-mute @DEFAULT_SINK@ 0")
   hl.env("ELECTRON_OZONE_PlATFORM_HINT", "wayland")
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
-  hl.exec_cmd("[workspace special:discord silent] sleep 2 && discord")
-  hl.exec_cmd("[workspace special:spotify silent] sleep 3 && spotify")
-  hl.exec_cmd("[[workspace special:steam silent] sleep 3 && steam")
+  hl.exec_cmd("sleep 2 && discord", { workspace = "special:discord silent" })
+  hl.exec_cmd("sleep 3 && spotify", { workspace = "special:spotify silent" })
+  hl.exec_cmd("sleep 3 && steam", { workspace = "special:steam silent" })
   hl.exec_cmd("bus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP") 
 end)
 
@@ -583,4 +583,20 @@ hl.window_rule({
     no_blur = true,
     max_size = { 1, 1 },
     opacity = "0.0"
+})
+
+hl.window_rule({
+    name ="repo pointer",
+    match = {
+        class = steam_app_3241660
+    },
+    confine_pointer = true,
+})
+
+hl.window_rule({
+    name ="blue prince pointer",
+    match = {
+        class = steam_app_1569580aw
+    },
+    confine_pointer = true,
 })
