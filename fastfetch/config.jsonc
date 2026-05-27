@@ -1,0 +1,31 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  "modules": [
+    "title",
+    "separator",
+    "os",
+    "host",
+    "kernel",
+    "uptime",
+    "packages",
+    "shell",
+    "de",
+    "wm",
+    "wmtheme",
+    "theme",
+    "icons",
+    "terminal",
+    "break",
+    "colors"
+  ],
+  "logo": {
+    "type": "kitty-direct",        // Logo type: auto, builtin, small, file, etc.
+    "source": "/home/digitalily/.face",      // Built-in logo name or file path
+    
+    "padding": {
+        "top": 1,          // Top padding
+        "left": 1,         // Left padding
+        "right": 2         // Right padding
+    }
+  }
+}
