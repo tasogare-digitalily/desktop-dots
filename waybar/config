@@ -125,7 +125,7 @@
                 "default": ["", "", ""]
             },
             "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-            "on-click-right": "python3 -u ~/.config/waybar/scripts/audio-changer.py"
+            "on-click-right": "pavucontrol"
         },
         "custom/pacman": {
             "format": "󰅢   {}",
