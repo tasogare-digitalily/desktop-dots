@@ -75,6 +75,22 @@ hl.monitor({
   scale = 2,
 })
 
+-- setup for my wacom tablet
+hl.device({
+    name = "wacom-one-pen-display-13-pen",
+    transform = 0,
+    output = "HDMI-A-1"
+})
+
+-- set wacom tablet to mirror second monitor
+hl.monitor({
+    output = "HDMI-A-1",
+    mode = "1920x1080@60",
+    position = "auto",
+    scale = 1,
+    mirror = "DP-2",
+
+})
 
 hl.monitor({
     output   = "",
@@ -95,6 +111,10 @@ hl.config({
 -- toolkit-specific scale
 hl.env("GDK_SCALE", "2")
 hl.env("XCURSOR_SIZE", "32")
+
+-- QT app scaling
+hl.env("QT_SCALE_FACTOR", "1.5")
+
 
 ---------------------
 ---- MY PROGRAMS ----
