@@ -1,5 +1,10 @@
 @import url('../../.cache/wal/colors-waybar.css');
 
+@define-color backgroundcolor @background;
+@define-color foregroundcolor @foreground;
+@define-color hovercolor @color9;
+
+
 * {
     font-size:16px;
     font-family: "Noto Sans CJK JP, CodeNewRoman Nerd Font Propo";
@@ -12,38 +17,38 @@ window#waybar{
     padding:7px;
     margin:10px 0px 5px 0px;
     border-radius:10px;
-    background: alpha(@background,.8);
+    background: alpha(@backgroundcolor,.8);
     box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 .modules-right {
     padding:7px;
     margin: 10px 10px 5px 0px;
     border-radius:10px;
-    background: alpha(@background,.8);
+    background: alpha(@backgroundcolor,.8);
     box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 tooltip {
-    background:@background;
-    color: @color7;
+    background:@backgroundcolor;
+    color: @foregroundcolor;
 }
 #clock:hover, #custom-pacman:hover, #custom-notification:hover,#wireplumber:hover,#bluetooth:hover,#network:hover,#battery:hover, #cpu:hover,#memory:hover,#temperature:hover{
     transition: all .3s ease;
-    color:@color9;
+    color:@hovercolor;
 }
 #custom-notification {
     padding: 0px 5px;
     transition: all .3s ease;
-    color:@color7;
+    color:@foregroundcolor;
 }
 #clock{
     padding: 0px 5px;
-    color:@color7;
+    color:@foregroundcolor;
     transition: all .3s ease;
 }
 #custom-pacman{
     padding: 0px 5px;
     transition: all .3s ease;
-    color:@color7;
+    color:@foregroundcolor;
 
 }
 #workspaces {
@@ -52,7 +57,7 @@ tooltip {
 #workspaces button {
     all:unset;
     padding: 0px 5px;
-    color: alpha(@color9,1);
+    color: alpha(@hovercolor,1);
     transition: all .2s ease;
 }
 #workspaces button:hover {
@@ -61,13 +66,21 @@ tooltip {
     text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
     transition: all 1s ease;
 }
+#workspaces button.urgent {
+    color: @foreground;
+    animation-name: blink;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
 #workspaces button.active {
     color: @color5;
     border: none;
     text-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
 }
 #workspaces button.empty {
-    color: alpha(@color7,.2);
+    color: alpha(@foregroundcolor,.2);
     border: none;
     text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .2);
 }
@@ -85,25 +98,25 @@ tooltip {
 #bluetooth{
     padding: 0px 5px;
     transition: all .3s ease;
-    color:@color7;
+    color:@foregroundcolor;
 }
 
 #wireplumber{
     padding: 0px 5px;
     transition: all .3s ease;
-    color:@color7;
+    color:@foregroundcolor;
 }
 
 #network{
     padding: 0px 5px;
     transition: all .3s ease;
-    color:@color7;
+    color:@foregroundcolor;
 
 }
 #battery{
     padding: 0px 5px;
     transition: all .3s ease;
-    color:@color7;
+    color:@foregroundcolor;
 
 
 }
@@ -143,7 +156,7 @@ tooltip {
 #cpu,#memory,#temperature{
     padding: 0px 5px;
     transition: all .3s ease; 
-    color:@color7;
+    color:@foregroundcolor;
 
 }
 #custom-endpoint{
@@ -152,16 +165,19 @@ tooltip {
 
 }
 #tray{
+    color: @foregroundcolor;
     padding: 0px 5px;
     transition: all .3s ease; 
 
 }
 #tray menu * {
+    color: @foregroundcolor;
     padding: 0px 5px;
     transition: all .3s ease; 
 }
 
 #tray menu separator {
+    color: @foregroundcolor;
     padding: 0px 5px;
     transition: all .3s ease; 
 }
@@ -170,64 +186,43 @@ tooltip {
     padding:7px;
     margin:10px 5px 5px 10px;
     border-radius:10px;
-    background: alpha(@background,.8);
+    background: alpha(@backgroundcolor,.8);
     box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 
-/* #mpris {
-    padding:7px;
-    margin:10 0 5 20;
-    border-radius:10px;
-    background: alpha(@background,.6);
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
-}
-
-#mpris.playing {
-    color: @color9;
-    background: alpha(@background,.8);
-}
-
-#mpris:hover {
-    color: @color9;
-}
-
-#mpris.playing:hover {
-    color: @color7;
-} */
-
-#custom-mpris-prev {
-    padding: 0px 5px;
-}
-
-#custom-mpris-prev:hover {
-    color: @color9;
-}
-
-#custom-mpris-next {
-    padding: 0px 5px;
-}
-
-#custom-mpris-next:hover {
-    color: @color9;
-}
 
 #custom-mpris {
     padding:7px 17px 7px 7px;
+    font-family: "JetBrains Mono", "Fira Code", "Noto Sans Mono", monospace;
     margin:10px 0px 5px 0px;
     border-radius:10px;
-    background: alpha(@background,.8);
+    color: @foregroundcolor;
+    background: alpha(@backgroundcolor,.8);
     box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+
+    font-family: "Noto Sans Mono CJK JP", "Noto Sans CJK JP Mono", "Symbols Nerd Font Mono", monospace;
+    font-size: 8px;
+    min-height: 16px;
 }
 
 #custom-mpris.playing {
-    color: @color9;
-    background: alpha(@background,.8);
+    color: @hovercolor;
+    background: alpha(@backgroundcolor,.8);
 }
 
 #custom-mpris:hover {
-    color: @color9;
+    color: @hovercolor;
 }
 
 #custom-mpris.playing:hover {
-    color: @color7;
+    color: @foregroundcolor;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.3;
+    }
 }
