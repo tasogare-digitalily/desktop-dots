@@ -19,31 +19,19 @@
 	        "ignored-players": []
         },
 
-        "custom/mpris-prev": {
-            "format": " ",
-            "justify": "left",
-            "align": "left",
-            "on-click": "playerctl previous"
-        },
-        "custom/mpris-next": {
-            "format": "",
-            "justify": "left",
-            "align": "left",
-            "on-click": "playerctl next"
-        },
-
         "custom/mpris": {
-		"exec": "python3 -u ~/.config/waybar/scripts/scrolling-mpris.py",
-		"format": "{text}",
-        "justify": "left",
-        "align": "left",
-		"return-type": "json",
-		"on-click": "playerctl play-pause"
-	},
+            "exec": "python3 -u ~/.config/waybar/scripts/scrolling-mpris.py",
+            "return-type": "json",
+            "format": "{}", 
+            "restart-interval": 1, // Ensures if the script crashes, it restarts immediately
+            "on-click": "playerctl play-pause",
+            "on-scroll-up": "playerctl next",
+            "on-scroll-down": "playerctl previous"
+        },
 
         "group/leftmostGroup": {
             "orientation": "horizontal",
-            "modules": ["custom/notification","clock","custom/pacman","tray", "custom/mpris-prev", "custom/mpris-next"]
+            "modules": ["custom/notification","clock","custom/pacman","tray"]
         },
 
         "hyprland/workspaces": {
