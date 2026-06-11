@@ -123,7 +123,7 @@ hl.env("QT_SCALE_FACTOR", "1.5")
 -- Set programs that you use
 local terminal    = "kitty"
 local fileManager = "thunar"
-local menu        = "wofi --show drun -n"
+local menu        = "pkill wofi || wofi --show drun -n"
 local lockScreen = "hyprlock"
 
 
@@ -150,7 +150,7 @@ hl.on("hyprland.start", function ()
   hl.env("ELECTRON_OZONE_PlATFORM_HINT", "wayland")
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
   hl.exec_cmd("sleep 2 && discord", { workspace = "special:discord silent" })
-  hl.exec_cmd("sleep 3 && spotify", { workspace = "special:spotify silent" })
+  hl.exec_cmd("sleep 3 && flatpak run com.spotify.Client", { workspace = "special:spotify silent" })
   hl.exec_cmd("sleep 3 && steam", { workspace = "special:steam silent" })
   hl.exec_cmd("sleep 5 && dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP") 
   hl.exec_cmd("sleep 6 && hypridle")
@@ -395,6 +395,7 @@ hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + SHIFT + I", hl.dsp.exec_cmd("firefox -private-window"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m region"))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("killall waybar && waybar & disown"))
+
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
