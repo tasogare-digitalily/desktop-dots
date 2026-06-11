@@ -389,11 +389,12 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + V", hl.dsp.window.float({action = "toggle"}))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("pavucontrol"))
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("pkill pavucontrol || pavucontrol"))
 hl.bind(mainMod .. " + J", hl.dsp.exec_cmd("togglesplit")) -- dwindle only
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + SHIFT + I", hl.dsp.exec_cmd("firefox -private-window"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m region"))
+hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("killall waybar && waybar & disown"))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
@@ -527,9 +528,8 @@ hl.window_rule({
     name = "windowrule-1",
     workspace = "special:spotify silent",
     match = { 
-        class = "^([Ss][Pp][Oo][Tt][Ii][Ff][Yy])([ ][Pp][Rr][Ee][Mm][Ii][Uu][Mm])?$",
-        initial_title="^([Ss][Pp][Oo][Tt][Ii][Ff][Yy])([ ][Pp][Rr][Ee][Mm][Ii][Uu][Mm])?$",
-    }
+        class = "spotify"
+    }  
 })
 
 hl.window_rule({
