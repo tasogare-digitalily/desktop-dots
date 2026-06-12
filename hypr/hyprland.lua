@@ -577,7 +577,7 @@ hl.window_rule({
 
 hl.window_rule({
     name = "windowrule-7",
-    stay_focused = true, -- TODO false?
+    stay_focused = false,
     workspace = "special:steam silent",
     match = {
         class="^(steam)$",
