@@ -78,7 +78,6 @@ hl.monitor({
 -- setup for my wacom tablet
 hl.device({
     name = "wacom-one-pen-display-13-pen",
-    transform = 0,
     output = "HDMI-A-1"
 })
 
@@ -86,9 +85,9 @@ hl.device({
 hl.monitor({
     output = "HDMI-A-1",
     mode = "1920x1080@60",
-    position = "auto",
+    position = "3840x0",
     scale = 1,
-    mirror = "DP-2",
+    mirror = "DP-2"
 
 })
 
@@ -137,6 +136,11 @@ local lockScreen = "hyprlock"
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function () 
+  hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+  -- these two are needed for a super bizarre workaround
+  hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP") 
+  hl.exec_cmd("killall -e xdg-desktop-portal-hyprland killall xdg-desktop-portal; /usr/lib/xdg-desktop-portal &") 
+  --
   hl.exec_cmd("sleep 2 && hyprctl reload &")
   hl.exec_cmd("wal -R")
   hl.exec_cmd("waybar")
@@ -152,8 +156,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("sleep 2 && discord", { workspace = "special:discord silent" })
   hl.exec_cmd("sleep 3 && flatpak run com.spotify.Client", { workspace = "special:spotify silent" })
   hl.exec_cmd("sleep 3 && steam", { workspace = "special:steam silent" })
-  hl.exec_cmd("sleep 5 && dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP") 
-  hl.exec_cmd("sleep 6 && hypridle")
+  hl.exec_cmd("sleep 5 && hypridle")
 end)
 
 
@@ -336,10 +339,9 @@ hl.config({
 
         sensitivity = -.1, -- -1.0 - 1.0, 0 means no modification.
 
-        touchpad = {
-            natural_scroll = true,
-            scroll_factor = 0.3
-        },
+        tablet = {
+            output = "HDMI-A-1"
+        }
     },
 })
 
