@@ -141,6 +141,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP") 
   hl.exec_cmd("killall -e xdg-desktop-portal-hyprland killall xdg-desktop-portal; /usr/lib/xdg-desktop-portal &") 
   --
+  hl.exec_cmd("systemctl --user start opentabletdriver")
   hl.exec_cmd("sleep 2 && hyprctl reload &")
   hl.exec_cmd("wal -R")
   hl.exec_cmd("waybar")
