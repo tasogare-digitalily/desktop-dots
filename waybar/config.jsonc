@@ -120,7 +120,7 @@
             "interval": 30,   
             "exec": "CHECKUPDATES_DB=\"/tmp/checkup-db-${UID}-$$\" checkupdates | wc -l",
             "exec-if": "exit 0",
-            "on-click": "kitty sh -c 'yay -Syu; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar",
+            "on-click": "kitty sh -c 'yay -Syu; flatpak update; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar",
             "signal": 8,
             "tooltip": false
         },

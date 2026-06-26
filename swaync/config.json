@@ -117,6 +117,12 @@
 
             ]
         }
+    },
+    "scripts": {
+        "notification-sound": {
+"exec": "sh ~/.config/swaync/notification.sh \"$app_name\"",
+            "run-on": "receive"
+        }
     }
 }
 
