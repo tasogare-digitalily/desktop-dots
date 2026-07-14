@@ -154,10 +154,10 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("pactl set-sink-mute @DEFAULT_SINK@ 0")
   hl.env("ELECTRON_OZONE_PlATFORM_HINT", "wayland")
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
-  hl.exec_cmd("sleep 2 && discord", { workspace = "special:discord silent" })
-  hl.exec_cmd("sleep 3 && flatpak run com.spotify.Client", { workspace = "special:spotify silent" })
-  hl.exec_cmd("sleep 3 && steam", { workspace = "special:steam silent" })
-  hl.exec_cmd("sleep 5 && hypridle")
+  hl.exec_cmd("sleep 3 && discord", { workspace = "special:discord silent" })
+  hl.exec_cmd("sleep 4 && flatpak run com.spotify.Client", { workspace = "special:spotify silent" })
+  hl.exec_cmd("sleep 5 && steam", { workspace = "special:steam silent" })
+  hl.exec_cmd("sleep 6 && hypridle")
 end)
 
 
@@ -396,7 +396,7 @@ hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("pkill pavucontrol || pavucontrol"))
 hl.bind(mainMod .. " + J", hl.dsp.exec_cmd("togglesplit")) -- dwindle only
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + SHIFT + I", hl.dsp.exec_cmd("firefox -private-window"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m region"))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m region -z"))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("killall waybar && waybar & disown"))
 
 
@@ -545,6 +545,15 @@ hl.window_rule({
     }
 })
 
+
+hl.window_rule({
+    name = "windowrule-41",
+    opacity = "1.0 override",
+    match = { 
+        class = "^(fusion360.exe)$",
+    }
+})
+
 hl.window_rule({
     name = "windowrule-3",
     no_focus = true,
@@ -613,6 +622,14 @@ hl.window_rule({
     name ="repo pointer",
     match = {
         class = steam_app_3241660
+    },
+    confine_pointer = true,
+})
+
+hl.window_rule({
+    name ="blue prince pointer",
+    match = {
+        class = steam_app_1569580aw
     },
     confine_pointer = true,
 })
