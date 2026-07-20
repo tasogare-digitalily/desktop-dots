@@ -111,6 +111,11 @@ label-show = false
 scroll-up = "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 1%+"
 scroll-down = "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 1%-"
 
+[modules.weather]
+location = "Chicago"
+units = "imperial"
+time-format = "24h"
+
 [[modules.custom]]
 id = "discord-tray"
 mode = "poll"
