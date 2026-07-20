@@ -139,12 +139,15 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
   -- these two are needed for a super bizarre workaround
   hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP") 
-  hl.exec_cmd("killall -e xdg-desktop-portal-hyprland killall xdg-desktop-portal; /usr/lib/xdg-desktop-portal &") 
+  hl.exec_cmd("killall -e xdg-desktop-portal-hyprland killall xdg-desktop-portal; /usr/lib/xdg-desktop-portal &")
+  hl.exec_cmd("~/.config/swaync/notification.sh &");
   --
   hl.exec_cmd("systemctl --user start opentabletdriver")
   hl.exec_cmd("sleep 2 && hyprctl reload &")
-  hl.exec_cmd("wal -R")
-  hl.exec_cmd("waybar")
+--   hl.exec_cmd("wal -R")
+  hl.exec_cmd("/home/digitalily/Git/wayle/target/release/wayle panel start")
+--   remove waybar for now
+--   hl.exec_cmd("waybar")
   hl.exec_cmd("awww-daemon")
   hl.exec_cmd("xwaylandvideobridge")
   hl.exec_cmd("sleep .5 && awww restore")
@@ -242,6 +245,9 @@ hl.config({
     animations = {
         enabled = true,
     },
+    binds = {
+        hide_special_on_workspace_change = true,
+    }
 })
 
 -- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
@@ -397,7 +403,8 @@ hl.bind(mainMod .. " + J", hl.dsp.exec_cmd("togglesplit")) -- dwindle only
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + SHIFT + I", hl.dsp.exec_cmd("firefox -private-window"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m region -z"))
-hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("killall waybar && waybar & disown"))
+-- hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("killall waybar && waybar & disown"))
+hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("/home/digitalily/Git/wayle/target/release/wayle panel restart"))
 
 
 -- Move focus with mainMod + arrow keys
@@ -564,10 +571,27 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    name = "windowrule-3.1",
+    no_focus = true,
+    match = { 
+        class = "^(net-runelite-launcher-Launcher)$",
+        title="^(win0)$",
+    }
+})
+
+hl.window_rule({
     name = "windowrule-4",
     opacity = "1.0 override",
     match = { 
         class = "^(net-runelite-client-RuneLite)$",
+    }
+})
+
+hl.window_rule({
+    name = "windowrule-4.1",
+    opacity = "1.0 override",
+    match = { 
+        class = "^(net-runelite-launcher-Launcher)$",
     }
 })
 

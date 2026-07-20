@@ -1,0 +1,218 @@
+[general]
+font-sans = "Noto Sans CJK JP"
+
+[bar]
+scale = 0.800000011920929
+inset-edge = 0.699999988079071
+inset-ends = 0.699999988079071
+module-gap = 1.0
+background-opacity = 0
+rounding = "sm"
+button-group-opacity = 0
+
+[[bar.layout]]
+monitor = "*"
+show = true
+left = [
+    "dashboard",
+    "clock",
+    "custom-updates",
+    { name = "tray", modules = [
+    "custom-discord-tray",
+    "custom-steam-tray",
+    "custom-spotify-tray",
+    "media",
+] },
+]
+center = ["hyprland-workspaces"]
+right = [
+    "notifications",
+    { name = "audio", modules = [
+    "bluetooth",
+    "volume",
+] },
+    "network",
+]
+
+[styling]
+rounding = "md"
+theme-provider = "pywal"
+pywal-saturation = 0.30246913580246915
+
+[modules.bluetooth]
+label-show = false
+
+[modules.clock]
+format = "%m/%d - %T"
+
+[modules.dashboard]
+icon-override = "cm-sparkles-symbolic"
+
+[modules.hyprland-workspaces]
+min-workspace-count = 10
+monitor-specific = false
+show-special = false
+display-mode = "icon"
+label-use-name = true
+workspace-padding = 0.550000011920929
+workspace-ignore = ["-97"]
+occupied-color = "border-error"
+
+[modules.hyprland-workspaces.workspace-map.-96]
+icon = "si-steam"
+label = "steam"
+
+[modules.hyprland-workspaces.workspace-map.-98]
+icon = "si-discord"
+label = "discord"
+
+[modules.hyprland-workspaces.workspace-map.1]
+label = "一"
+
+[modules.hyprland-workspaces.workspace-map.10]
+label = "十"
+
+[modules.hyprland-workspaces.workspace-map.2]
+label = "二"
+
+[modules.hyprland-workspaces.workspace-map.3]
+label = "三"
+
+[modules.hyprland-workspaces.workspace-map.4]
+label = "四"
+
+[modules.hyprland-workspaces.workspace-map.5]
+label = "五"
+
+[modules.hyprland-workspaces.workspace-map.6]
+label = "六"
+
+[modules.hyprland-workspaces.workspace-map.7]
+label = "七"
+
+[modules.hyprland-workspaces.workspace-map.8]
+label = "八"
+
+[modules.hyprland-workspaces.workspace-map.9]
+label = "九"
+
+[modules.media]
+icon-type = "spinning-disc"
+format = "  {{ title }}  -  {{ artist }}  "
+label-max-length = 20
+label-marquee = true
+right-click = "playerctl next"
+middle-click = "playerctl play-pause"
+
+[modules.network]
+label-show = false
+
+[modules.volume]
+scroll-up = "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 1%+"
+scroll-down = "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 1%-"
+
+[[modules.custom]]
+id = "discord-tray"
+mode = "poll"
+interval-ms = 5000
+restart-policy = "never"
+restart-interval-ms = 1000
+format = "{{ output }}"
+hide-if-empty = false
+icon-name = "si-discord"
+icon-show = true
+icon-color = "auto"
+icon-bg-color = "auto"
+label-show = false
+label-color = "auto"
+label-max-length = 0
+button-bg-color = "bg-surface-elevated"
+border-show = false
+border-color = "auto"
+left-click = """hyprctl dispatch 'hl.dsp.workspace.toggle_special("discord")'"""
+right-click = ""
+middle-click = ""
+scroll-up = ""
+scroll-down = ""
+
+[[modules.custom]]
+id = "steam-tray"
+mode = "poll"
+interval-ms = 5000
+restart-policy = "never"
+restart-interval-ms = 1000
+format = "{{ output }}"
+hide-if-empty = false
+icon-name = "si-steam"
+icon-show = true
+icon-color = "auto"
+icon-bg-color = "auto"
+label-show = false
+label-color = "auto"
+label-max-length = 0
+button-bg-color = "bg-surface-elevated"
+border-show = false
+border-color = "auto"
+left-click = """hyprctl dispatch 'hl.dsp.workspace.toggle_special("steam")'"""
+right-click = ""
+middle-click = ""
+scroll-up = ""
+scroll-down = ""
+
+[[modules.custom]]
+id = "spotify-tray"
+mode = "poll"
+interval-ms = 5000
+restart-policy = "never"
+restart-interval-ms = 1000
+format = "{{ output }}"
+hide-if-empty = false
+icon-name = "si-spotify"
+icon-show = true
+icon-color = "auto"
+icon-bg-color = "auto"
+label-show = false
+label-color = "auto"
+label-max-length = 0
+button-bg-color = "bg-surface-elevated"
+border-show = false
+border-color = "auto"
+left-click = """hyprctl dispatch 'hl.dsp.workspace.toggle_special("spotify")'"""
+right-click = ""
+middle-click = ""
+scroll-up = ""
+scroll-down = ""
+
+[[modules.custom]]
+id = "updates"
+command = 'CHECKUPDATES_DB="/tmp/checkup-db-${UID}-$$" checkupdates | wc -l'
+mode = "poll"
+interval-ms = 600000
+restart-policy = "on-exit"
+restart-interval-ms = 1000
+format = "{{ output }}"
+hide-if-empty = false
+icon-name = "cm-cloud-download-symbolic"
+icon-show = true
+icon-color = "auto"
+icon-bg-color = "auto"
+label-show = true
+label-color = "auto"
+label-max-length = 0
+button-bg-color = "bg-surface-elevated"
+border-show = false
+border-color = "auto"
+left-click = "kitty sh -c 'yay -Syu; flatpak update; echo Done - Press enter to exit; read'; exit;"
+right-click = ""
+middle-click = ""
+scroll-up = ""
+scroll-down = ""
+on-action = "echo 0;"
+
+[wallpaper]
+transition-type = "fade"
+cycling-enabled = true
+cycling-directory = "/home/digitalily/wallpapers/walls/"
+cycling-mode = "shuffle"
+cycling-interval-mins = 10
+cycling-same-image = true
