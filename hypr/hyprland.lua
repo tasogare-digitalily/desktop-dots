@@ -150,10 +150,11 @@ hl.on("hyprland.start", function ()
 --   hl.exec_cmd("waybar")
   hl.exec_cmd("awww-daemon")
   hl.exec_cmd("xwaylandvideobridge")
-  hl.exec_cmd("sleep .5 && awww restore")
-  hl.exec_cmd("swaync")
+  -- disabling below to see if that fixes the weird wallpaper issue
+--   hl.exec_cmd("sleep .5 && awww restore")
+--   hl.exec_cmd("swaync")
   hl.exec_cmd("pypr")
-  hl.exec_cmd("swaync-client -default")
+--   hl.exec_cmd("swaync-client -default")
   hl.exec_cmd("pactl set-sink-mute @DEFAULT_SINK@ 0")
   hl.env("ELECTRON_OZONE_PlATFORM_HINT", "wayland")
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
@@ -224,8 +225,8 @@ hl.config({
         rounding_power = 2,
 
         -- Change transparency of focused and unfocused windows
-        active_opacity   = 0.78,
-        inactive_opacity = 0.7,
+        active_opacity   = 0.88,
+        inactive_opacity = 0.8,
 
         shadow = {
             enabled      = true,
@@ -258,7 +259,7 @@ hl.curve("almostLinear",   { type = "bezier", points = { {0.5, 0.5},   {0.75, 1}
 hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1}     } })
 
 -- Default springs
-hl.curve("easy",           { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
+hl.curve("easy",           { type = "spring", mass = 1, stiffness = 71.2633*5, dampening = 15.8273644*2 })
 
 hl.animation({ leaf = "global",        enabled = true,  speed = 10,   bezier = "default" })
 hl.animation({ leaf = "border",        enabled = true,  speed = 5.39, bezier = "easeOutQuint" })
@@ -388,7 +389,7 @@ hl.device({
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
-hl.bind(mainMod .. " + SUPER_L", hl.dsp.exec_cmd("swaync-client -t -sw"))
+-- hl.bind(mainMod .. " + SUPER_L", hl.dsp.exec_cmd("swaync-client -t -sw"))
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd(lockScreen))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("sh ~/.config/hypr/wallpaper.sh"))
@@ -453,17 +454,17 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = tr
 ---- LAYER RULES ----
 ---------------------
 
-hl.layer_rule({
-  match        = { namespace = "swaync-control-center" },
-  blur         = true,
-  ignore_alpha = 0.5,
-})
+-- hl.layer_rule({
+--   match        = { namespace = "swaync-control-center" },
+--   blur         = true,
+--   ignore_alpha = 0.5,
+-- })
 
-hl.layer_rule({
-  match        = { namespace = "swaync-notification-window" },
-  blur         = true,
-  ignore_alpha = 0.5,
-})
+-- hl.layer_rule({
+--   match        = { namespace = "swaync-notification-window" },
+--   blur         = true,
+--   ignore_alpha = 0.5,
+-- })
 
 hl.layer_rule({
   match        = { namespace = "wofi" },

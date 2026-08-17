@@ -5,10 +5,12 @@ font-sans = "Noto Sans CJK JP"
 scale = 0.800000011920929
 inset-edge = 0.699999988079071
 inset-ends = 0.699999988079071
-module-gap = 1.0
+module-gap = 0.75
 background-opacity = 0
 rounding = "sm"
-button-group-opacity = 0
+button-rounding = "lg"
+button-group-opacity = 80
+button-group-rounding = "lg"
 
 [[bar.layout]]
 monitor = "*"
@@ -26,11 +28,12 @@ left = [
 ]
 center = ["hyprland-workspaces"]
 right = [
-    "notifications",
     { name = "audio", modules = [
-    "bluetooth",
     "volume",
+    "microphone",
+    "bluetooth",
 ] },
+    "notifications",
     "network",
 ]
 
@@ -104,10 +107,18 @@ label-marquee = true
 right-click = "playerctl next"
 middle-click = "playerctl play-pause"
 
+[modules.microphone]
+label-show = false
+middle-click = "/home/digitalily/Git/wayle/target/release/wayle audio input-mute"
+
 [modules.network]
 label-show = false
 
+[modules.notifications]
+right-click = "/home/digitalily/Git/wayle/target/release/wayle notify dnd"
+
 [modules.volume]
+middle-click = "/home/digitalily/Git/wayle/target/release/wayle audio output-mute"
 scroll-up = "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 1%+"
 scroll-down = "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 1%-"
 
@@ -192,8 +203,8 @@ scroll-down = ""
 id = "updates"
 command = 'CHECKUPDATES_DB="/tmp/checkup-db-${UID}-$$" checkupdates | wc -l'
 mode = "poll"
-interval-ms = 600000
-restart-policy = "on-exit"
+interval-ms = 6000
+restart-policy = "never"
 restart-interval-ms = 1000
 format = "{{ output }}"
 hide-if-empty = false
@@ -219,5 +230,5 @@ transition-type = "fade"
 cycling-enabled = true
 cycling-directory = "/home/digitalily/wallpapers/walls/"
 cycling-mode = "shuffle"
-cycling-interval-mins = 10
+cycling-interval-mins = 60
 cycling-same-image = true
