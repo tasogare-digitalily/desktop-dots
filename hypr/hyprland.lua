@@ -140,12 +140,13 @@ hl.on("hyprland.start", function ()
   -- these two are needed for a super bizarre workaround
   hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP") 
   hl.exec_cmd("killall -e xdg-desktop-portal-hyprland killall xdg-desktop-portal; /usr/lib/xdg-desktop-portal &")
-  hl.exec_cmd("~/.config/swaync/notification.sh &");
+--   hl.exec_cmd("~/.config/swaync/notification.sh &");
   --
   hl.exec_cmd("systemctl --user start opentabletdriver")
   hl.exec_cmd("sleep 2 && hyprctl reload &")
 --   hl.exec_cmd("wal -R")
-  hl.exec_cmd("/home/digitalily/Git/wayle/target/release/wayle panel start")
+--   hl.exec_cmd("/home/digitalily/Git/wayle/target/release/wayle panel start")
+  hl.exec_cmd("noctalia")
 --   remove waybar for now
 --   hl.exec_cmd("waybar")
   hl.exec_cmd("awww-daemon")
@@ -161,7 +162,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("sleep 3 && discord", { workspace = "special:discord silent" })
   hl.exec_cmd("sleep 4 && flatpak run com.spotify.Client", { workspace = "special:spotify silent" })
   hl.exec_cmd("sleep 5 && steam", { workspace = "special:steam silent" })
-  hl.exec_cmd("sleep 6 && hypridle")
+--   hl.exec_cmd("sleep 6 && hypridle")
 end)
 
 
@@ -279,6 +280,28 @@ hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "
 hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
 
+
+
+--named workspaces
+hl.workspace_rule({ workspace = "1", default_name = "一" })
+hl.workspace_rule({ workspace = "2", default_name = "二" })
+hl.workspace_rule({ workspace = "3", default_name = "三" })
+hl.workspace_rule({ workspace = "4", default_name = "四" })
+hl.workspace_rule({ workspace = "5", default_name = "五" })
+hl.workspace_rule({ workspace = "6", default_name = "六" })
+hl.workspace_rule({ workspace = "7", default_name = "七" })
+hl.workspace_rule({ workspace = "8", default_name = "八" })
+hl.workspace_rule({ workspace = "9", default_name = "九" })
+hl.workspace_rule({ workspace = "10", default_name = "十" })
+
+-- hl.workspace_rule({ workspace = "2", monitor = "DP-1", persistent = true, default_name = "code" })
+-- hl.workspace_rule({ workspace = "3", monitor = "DP-1", persistent = true, default_name = "chat" })
+-- hl.workspace_rule({ workspace = "4", monitor = "DP-1", persistent = true, default_name = "game" })
+-- hl.workspace_rule({ workspace = "5", monitor = "DP-1", persistent = true, default_name = "design" })
+
+
+
+
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 -- "Smart gaps" / "No gaps when only"
 -- uncomment all if you wish to use that.
@@ -389,23 +412,23 @@ hl.device({
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
--- hl.bind(mainMod .. " + SUPER_L", hl.dsp.exec_cmd("swaync-client -t -sw"))
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd(lockScreen))
-hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("sh ~/.config/hypr/wallpaper.sh"))
 hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.close())
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("wlogout -b 2"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + V", hl.dsp.window.float({action = "toggle"}))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("pkill pavucontrol || pavucontrol"))
 hl.bind(mainMod .. " + J", hl.dsp.exec_cmd("togglesplit")) -- dwindle only
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + SHIFT + I", hl.dsp.exec_cmd("firefox -private-window"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m region -z"))
--- hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("killall waybar && waybar & disown"))
-hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("/home/digitalily/Git/wayle/target/release/wayle panel restart"))
+
+-- noctalia binds
+hl.bind(mainMod .. "+ SUPER_L", hl.dsp.exec_cmd("noctalia msg panel-toggle control-center"))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("noctalia msg session lock"))
+hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("noctalia msg panel-toggle wallpaper"))
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("noctalia msg screenshot-region"))
+
 
 
 -- Move focus with mainMod + arrow keys
@@ -484,6 +507,17 @@ hl.layer_rule({
   blur         = true,
   dim_around = true,
   ignore_alpha = 0.5,
+})
+
+hl.layer_rule({
+  name = "noctalia",
+  match = {
+    namespace = "^noctalia-(bar-.+|notification|dock|panel|attached-panel|osd|window-switcher)$",
+  },
+  no_anim = true,
+  ignore_alpha = 0.5,
+  blur = true,
+  blur_popups = true,
 })
 
 --------------------------------
@@ -665,4 +699,11 @@ hl.window_rule({
         class = steam_app_1569580aw
     },
     confine_pointer = true,
+})
+
+-- noctalia
+hl.window_rule({
+    match = { class = "dev.noctalia.Noctalia" },
+    float = true,
+    size = { 1080, 920 },
 })
