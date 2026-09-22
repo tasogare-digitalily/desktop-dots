@@ -160,8 +160,9 @@ hl.on("hyprland.start", function ()
   hl.env("ELECTRON_OZONE_PlATFORM_HINT", "wayland")
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
   hl.exec_cmd("sleep 3 && discord", { workspace = "special:discord silent" })
-  hl.exec_cmd("sleep 4 && flatpak run com.spotify.Client", { workspace = "special:spotify silent" })
+  hl.exec_cmd("sleep 4 && spotify-launcher", { workspace = "special:spotify silent" })
   hl.exec_cmd("sleep 5 && steam", { workspace = "special:steam silent" })
+  hl.exec_cmd("sleep 8 && spicetify watch -s")
 --   hl.exec_cmd("sleep 6 && hypridle")
 end)
 
@@ -573,9 +574,9 @@ hl.window_rule({
 hl.window_rule({
     name = "windowrule-1",
     workspace = "special:spotify silent",
-    match = { 
-        class = "spotify"
-    }  
+    match = {
+        class = "^[Ss]potify$"
+    }
 })
 
 hl.window_rule({
