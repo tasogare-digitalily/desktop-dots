@@ -1,19 +1,22 @@
 #!/usr/bin/env bash
 #
 # Brings a machine to parity with this desktop's setup: the packages that
-# hypr/, waybar/, wofi/, swaync/, wal/, and noctalia/ (this repo's tracked
-# config dirs) actually invoke at runtime, plus the native Spotify +
-# Spicetify + Noctalia color-integration setup (spotify-launcher install,
-# Comfy + Colorful Spicetify themes, the noctalia community-template files
-# that drive live color updates). Meant to be run from inside a checked-out
-# copy of this desktop-dots repo, after `git pull` has already synced those
-# dirs. Idempotent: safe to re-run, already-present pieces are skipped.
+# hypr/, waybar/, wofi/, wal/, and noctalia/ (this repo's tracked config
+# dirs) actually invoke at runtime, plus the native Spotify + Spicetify +
+# Noctalia color-integration setup (spotify-launcher install, Comfy +
+# Colorful Spicetify themes, the noctalia community-template files that
+# drive live color updates). Meant to be run from inside a checked-out
+# copy of this desktop-dots repo, after `git pull` has already synced
+# those dirs. Idempotent: safe to re-run, already-present pieces skipped.
+#
+# hyprlock, swaync, wlogout, matugen-bin, and caelestia/quickshell-git were
+# all removed from this desktop (superseded by noctalia's own lock,
+# notifications, session panel, and color generation) — nothing here
+# installs them, and this repo no longer tracks their configs.
 #
 # Deliberately NOT covered: general desktop software with no tie to a
-# tracked config (game emulators, 3D-print slicers, printer drivers, etc.)
-# and the caelestia/quickshell-git stack, which looks like a separate,
-# parallel theming setup rather than part of the noctalia rice. Install
-# those yourself if you want them on this machine too.
+# tracked config (game emulators, 3D-print slicers, printer drivers, etc).
+# Install that yourself if you want it on this machine too.
 #
 # On any failure, every change this run made (and only this run) is rolled
 # back automatically. Anything this script overwrites is backed up first;
@@ -145,22 +148,24 @@ manifest_note "=== bootstrap-desktop-parity.sh run started ==="
 
 # ---------- 0. packages the tracked configs actually invoke at runtime ----------
 # Sourced from an audit of hypr/hyprland.lua (autostart + keybinds),
-# waybar/config + waybar/scripts/*, wofi/config, swaync/*.sh, and the
-# wal/ template dir. Trivial base-system packages (systemd, dbus,
-# procps-ng, psmisc, systemd-sysvcompat) are skipped as guaranteed-present
-# on any usable Arch desktop.
+# waybar/config + waybar/scripts/*, and wofi/config. Trivial base-system
+# packages (systemd, dbus, procps-ng, psmisc, systemd-sysvcompat) are
+# skipped as guaranteed-present on any usable Arch desktop. hyprlock,
+# swaync, and wlogout are deliberately NOT here: fully replaced by
+# noctalia's own lock/notifications/session panel and removed from this
+# desktop. matugen-bin and mpv were removed alongside them (their only
+# uses were swaync's notification sound and the old pre-noctalia matugen
+# config — noctalia does its own color generation internally).
 PACMAN_DESKTOP_PACKAGES=(
-  hyprland hyprlock noctalia waybar wofi swaync            # core session/shell
+  hyprland noctalia waybar wofi                             # core session/shell
   awww hyprpicker hyprpolkitagent xdg-desktop-portal xdg-desktop-portal-hyprland
   kitty thunar firefox code discord steam                  # hyprland.lua vars/autostart
   brightnessctl playerctl wireplumber pavucontrol blueman   # hardware/media keybinds
   imagemagick libnotify wl-clipboard                        # waybar/scripts/colorpicker.sh
-  mpv                                                       # swaync/notification.sh sound
   pacman-contrib flatpak python                             # waybar custom modules
 )
 AUR_DESKTOP_PACKAGES=(
-  wlogout xwaylandvideobridge opentabletdriver
-  matugen-bin                                                # noctalia's color-generation backend
+  xwaylandvideobridge opentabletdriver
   python-pywal16 python-pywalfox                             # wal/ templates + the active "pywalfox" noctalia community template
   zscroll-git                                                # scrolling-mpris waybar module
 )

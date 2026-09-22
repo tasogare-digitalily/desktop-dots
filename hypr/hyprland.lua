@@ -123,7 +123,6 @@ hl.env("QT_SCALE_FACTOR", "1.5")
 local terminal    = "kitty"
 local fileManager = "thunar"
 local menu        = "pkill wofi || wofi --show drun -n"
-local lockScreen = "hyprlock"
 
 
 -------------------
@@ -140,7 +139,6 @@ hl.on("hyprland.start", function ()
   -- these two are needed for a super bizarre workaround
   hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP") 
   hl.exec_cmd("killall -e xdg-desktop-portal-hyprland killall xdg-desktop-portal; /usr/lib/xdg-desktop-portal &")
---   hl.exec_cmd("~/.config/swaync/notification.sh &");
   --
   hl.exec_cmd("systemctl --user start opentabletdriver")
   hl.exec_cmd("sleep 2 && hyprctl reload &")
@@ -153,9 +151,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("xwaylandvideobridge")
   -- disabling below to see if that fixes the weird wallpaper issue
 --   hl.exec_cmd("sleep .5 && awww restore")
---   hl.exec_cmd("swaync")
   hl.exec_cmd("pypr")
---   hl.exec_cmd("swaync-client -default")
   hl.exec_cmd("pactl set-sink-mute @DEFAULT_SINK@ 0")
   hl.env("ELECTRON_OZONE_PlATFORM_HINT", "wayland")
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
@@ -478,28 +474,9 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = tr
 ---- LAYER RULES ----
 ---------------------
 
--- hl.layer_rule({
---   match        = { namespace = "swaync-control-center" },
---   blur         = true,
---   ignore_alpha = 0.5,
--- })
-
--- hl.layer_rule({
---   match        = { namespace = "swaync-notification-window" },
---   blur         = true,
---   ignore_alpha = 0.5,
--- })
-
 hl.layer_rule({
   match        = { namespace = "wofi" },
   blur         = true,
-  ignore_alpha = 0.5,
-})
-
-hl.layer_rule({
-  match        = { namespace = "wlogout" },
-  blur         = true,
-  dim_around = true,
   ignore_alpha = 0.5,
 })
 
