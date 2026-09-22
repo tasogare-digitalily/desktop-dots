@@ -254,6 +254,16 @@ chmod +x "$CT_DEST/apply.sh"
 manifest_note "RESTORED noctalia community-template files -> $CT_DEST"
 c_ok "noctalia community-template files in place"
 
+# ---------- 6b. noctalia notification sound ----------
+# noctalia/config.toml's [audio].notification_sound points here by absolute
+# path; also outside ~/.config so it doesn't sync via git pull alone.
+SOUND_DEST="$HOME/.local/share/noctalia/sounds/notification.mp3"
+mkdir -p "$(dirname "$SOUND_DEST")"
+backup_path "$SOUND_DEST"
+cp "$SCRIPT_DIR/assets/notification.mp3" "$SOUND_DEST"
+manifest_note "RESTORED notification sound -> $SOUND_DEST"
+c_ok "notification sound in place"
+
 # ---------- 7. configure spicetify to match desktop state ----------
 c_info "configuring spicetify (current_theme=Colorful, color_scheme=noctalia)..."
 spicetify config current_theme Colorful color_scheme noctalia

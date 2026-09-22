@@ -2,7 +2,7 @@ config_version = 13
 
 [audio]
 enable_sounds = true
-notification_sound = "/usr/share/noctalia/assets/sounds/notification.wav"
+notification_sound = "/home/digitalily/.local/share/noctalia/sounds/notification.mp3"
 sound_volume = 0.99999997764825821
 
 [bar.default]
