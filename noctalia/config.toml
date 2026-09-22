@@ -264,8 +264,8 @@ wallpaper_scheme = "vibrant"
     community_ids = [ "pywalfox", "vscode", "prismlauncher", "steam", "fastfetch" ]
 
         [theme.templates.user.spicetify]
-        input_path = "/home/digitalily/.local/state/noctalia/community-templates/spicetify/spicetify.ini"
-        output_path = "$XDG_CONFIG_HOME/spicetify/Themes/Comfy/color.ini"
+        input_path = "/home/digitalily/.local/state/noctalia/community-templates/spicetify/spicetify_colorful.ini"
+        output_path = "$XDG_CONFIG_HOME/spicetify/Themes/Colorful/color.ini"
         post_hook = "bash '/home/digitalily/.local/state/noctalia/community-templates/spicetify/apply.sh'"
 
 [wallpaper]
