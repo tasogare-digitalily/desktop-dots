@@ -1,0 +1,13 @@
+{
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.fontFamily": "'CozetteVector', 'DroidSansM Nerd Font', monospace",
+    "editor.fontSize": 13,
+    "terminal.integrated.fontFamily": "'CozetteVector', 'DroidSansM Nerd Font', monospace",
+    "terminal.integrated.fontSize": 13,
+    "workbench.editor.pinnedTabsOnSeparateRow": true,
+    "cSpell.userWords": [
+        "tasogare"
+    ],
+    "http.systemCertificatesNode": true,
+    "git.enableSmartCommit": true
+}
