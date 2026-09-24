@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #
 # Brings a machine to parity with this desktop's setup: the packages that
-# hypr/, waybar/, wofi/, wal/, noctalia/, kitty/, and fontconfig/ (this
-# repo's tracked config dirs) actually invoke at runtime (including the
-# Cozette font), plus the native Spotify + Spicetify +
+# hypr/, waybar/, wofi/, wal/, noctalia/, kitty/, fontconfig/, and
+# "Code - OSS"/User/settings.json (this repo's tracked configs) actually
+# invoke at runtime (including the Cozette font), plus the native Spotify + Spicetify +
 # Noctalia color-integration setup (spotify-launcher install, Comfy +
 # Colorful Spicetify themes, the noctalia community-template files that
 # drive live color updates). Meant to be run from inside a checked-out
