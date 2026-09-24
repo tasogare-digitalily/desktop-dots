@@ -15,6 +15,7 @@
     "theme",
     "icons",
     "terminal",
+    "terminalfont",
     "break",
     "colors"
   ],
@@ -22,6 +23,9 @@
     "type": "kitty-direct",        // Logo type: auto, builtin, small, file, etc.
     "source": "/home/digitalily/.face",      // Built-in logo name or file path
     
+    "height": 14,
+    "width": 30,
+
     "padding": {
         "top": 1,          // Top padding
         "left": 1,         // Left padding

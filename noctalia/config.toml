@@ -10,7 +10,7 @@ background_opacity = 0.59999998658895493
 center = [ "clock", "workspaces" ]
 contact_shadow = true
 end = [ "clipboard", "network", "group:g3", "group:g2", "brightness", "battery", "control-center", "tray", "session" ]
-font_family = "Noto Sans CJK JP"
+font_family = "CozetteVector"
 margin_ends = 300
 radius = 80
 scale = 1.1500000096857548
@@ -240,6 +240,7 @@ auto_check_hours = 1
 enabled = [ "yuuto/arch-updater", "nightwatch75/todo", "noctalia/notes", "noctalia/screen_recorder" ]
 
 [shell]
+font_family = "CozetteVector"
 password_style = "random"
 polkit_agent = true
 settings_window_translucent = true
@@ -317,7 +318,7 @@ capsule = true
 capsule_opacity = 0.59999999999999998
 capsule_padding = 12
 capsule_radius = 7
-scale = 0.75
+scale = 0.85
 title_scroll = "on_hover"
 
 [widget.network]

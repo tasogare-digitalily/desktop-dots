@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 #
 # Brings a machine to parity with this desktop's setup: the packages that
-# hypr/, waybar/, wofi/, wal/, and noctalia/ (this repo's tracked config
-# dirs) actually invoke at runtime, plus the native Spotify + Spicetify +
+# hypr/, waybar/, wofi/, wal/, noctalia/, kitty/, and fontconfig/ (this
+# repo's tracked config dirs) actually invoke at runtime (including the
+# Cozette font), plus the native Spotify + Spicetify +
 # Noctalia color-integration setup (spotify-launcher install, Comfy +
 # Colorful Spicetify themes, the noctalia community-template files that
 # drive live color updates). Meant to be run from inside a checked-out
@@ -168,6 +169,7 @@ AUR_DESKTOP_PACKAGES=(
   xwaylandvideobridge opentabletdriver
   python-pywal16 python-pywalfox                             # wal/ templates + the active "pywalfox" noctalia community template
   zscroll-git                                                # scrolling-mpris waybar module
+  cozette-ttf cozette-otb                                    # kitty.conf + noctalia font_family (CozetteVector)
 )
 
 for pkg in "${PACMAN_DESKTOP_PACKAGES[@]}"; do
@@ -263,6 +265,19 @@ backup_path "$SOUND_DEST"
 cp "$SCRIPT_DIR/assets/notification.mp3" "$SOUND_DEST"
 manifest_note "RESTORED notification sound -> $SOUND_DEST"
 c_ok "notification sound in place"
+
+# ---------- 6c. rebuild font cache for the Cozette mono rule ----------
+# fontconfig/conf.d/50-cozette-mono.conf (synced via git) marks CozetteVector
+# as monospace; without it kitty skips the font and falls back. It's a
+# scan-time rule, so it only takes effect once the cache is rebuilt as this
+# user — the package's pacman hook only refreshes the system cache.
+c_info "rebuilding fontconfig cache..."
+fc-cache -f
+if fc-list :spacing=mono family | grep -qx CozetteVector; then
+  c_ok "CozetteVector registered as monospace"
+else
+  c_warn "CozetteVector not seen as monospace — is fontconfig/conf.d/50-cozette-mono.conf synced?"
+fi
 
 # ---------- 7. configure spicetify to match desktop state ----------
 c_info "configuring spicetify (current_theme=Colorful, color_scheme=noctalia)..."

@@ -409,6 +409,7 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd(terminal .. " --class kitty-float"))
 hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
@@ -683,4 +684,13 @@ hl.window_rule({
     match = { class = "dev.noctalia.Noctalia" },
     float = true,
     size = { 1080, 920 },
+})
+
+-- SUPER + SHIFT + RETURN terminal opens centered and floating
+hl.window_rule({
+    name = "kitty-float",
+    match = { class = "^(kitty-float)$" },
+    float = true,
+    center = true,
+    size = { 960, 600 },
 })
