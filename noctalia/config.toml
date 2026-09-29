@@ -8,7 +8,7 @@ sound_volume = 0.99999997764825821
 background_opacity = 0.59999998658895493
 center = [ "clock", "workspaces" ]
 contact_shadow = true
-end = [ "clipboard", "network", "group:g3", "group:g2", "brightness", "battery", "control-center", "tray", "session" ]
+end = [ "clipboard", "network", "group:g4", "group:g3", "group:g2", "brightness", "battery", "control-center", "tray", "session" ]
 font_family = "CozetteVector"
 margin_ends = 300
 radius = 80
@@ -45,6 +45,16 @@ widget_spacing = 7
     members = [ "date" ]
     opacity = 1.0
     padding = 6.0
+
+    [[bar.default.capsule_group]]
+    accordion = true
+    accordion_direction = "start"
+    enabled = true
+    fill = "#00000000"
+    id = "g4"
+    members = [ "workspace-expand", "workspace-spotify", "workspace-discord", "workspace-steam" ]
+    opacity = 1.0
+    padding = 2.0
 
 [battery.device."/org/freedesktop/UPower/devices/battery_hidpp_battery_0"]
 warning_threshold = 10
@@ -331,6 +341,39 @@ type = "noctalia/screen_recorder:recorder"
 
 [widget.session]
 enabled = false
+
+[widget.workspace-expand]
+type = "custom_button"
+glyph = "chevron-left"
+tooltip = "App workspaces"
+scale = 1.0
+
+[widget.workspace-spotify]
+type = "custom_button"
+glyph = "brand-spotify"
+tooltip = "Spotify"
+scale = 1.0
+
+    [widget.workspace-spotify.actions]
+    left = "exec ~/.config/hypr/toggle-special.sh spotify"
+
+[widget.workspace-discord]
+type = "custom_button"
+glyph = "brand-discord"
+tooltip = "Discord"
+scale = 1.0
+
+    [widget.workspace-discord.actions]
+    left = "exec ~/.config/hypr/toggle-special.sh discord"
+
+[widget.workspace-steam]
+type = "custom_button"
+glyph = "brand-steam"
+tooltip = "Steam"
+scale = 1.0
+
+    [widget.workspace-steam.actions]
+    left = "exec ~/.config/hypr/toggle-special.sh steam"
 
 [widget.todo]
 type = "nightwatch75/todo:todo"
