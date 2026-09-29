@@ -159,7 +159,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("sleep 4 && spotify-launcher", { workspace = "special:spotify silent" })
   hl.exec_cmd("sleep 5 && steam", { workspace = "special:steam silent" })
   hl.exec_cmd("sleep 8 && spicetify watch -s")
-  hl.exec_cmd("sleep 9 && thunderbird --headless")
+  hl.exec_cmd("sleep 9 && thunderbird", { workspace = "special:mail silent" })
 end)
 
 
@@ -554,6 +554,14 @@ hl.window_rule({
     workspace = "special:spotify silent",
     match = {
         class = "^[Ss]potify$"
+    }
+})
+
+hl.window_rule({
+    name = "windowrule-mail",
+    workspace = "special:mail silent",
+    match = {
+        class = "^org\\.mozilla\\.Thunderbird$"
     }
 })
 
