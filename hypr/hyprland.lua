@@ -159,6 +159,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("sleep 4 && spotify-launcher", { workspace = "special:spotify silent" })
   hl.exec_cmd("sleep 5 && steam", { workspace = "special:steam silent" })
   hl.exec_cmd("sleep 8 && spicetify watch -s")
+  hl.exec_cmd("sleep 9 && thunderbird --headless")
 end)
 
 
