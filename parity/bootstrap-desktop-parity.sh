@@ -257,12 +257,16 @@ manifest_note "RESTORED noctalia community-template files -> $CT_DEST"
 c_ok "noctalia community-template files in place"
 
 # ---------- 6b. noctalia notification sound ----------
-# noctalia/config.toml's [audio].notification_sound points here by absolute
-# path; also outside ~/.config so it doesn't sync via git pull alone.
-SOUND_DEST="$HOME/.local/share/noctalia/sounds/notification.mp3"
+# noctalia >=5.2 dropped the old [audio].notification_sound config key for a
+# freedesktop sound-theme system (named events under a themed directory).
+# This overrides just the 'message-new-instant' event via a user-local
+# ~/.local/share/sounds override, which XDG lookup prefers over the
+# system /usr/share/sounds copy. Outside ~/.config, so it doesn't sync via
+# git pull alone. Requires .ogg/.oga/.wav — not .mp3.
+SOUND_DEST="$HOME/.local/share/sounds/freedesktop/stereo/message-new-instant.ogg"
 mkdir -p "$(dirname "$SOUND_DEST")"
 backup_path "$SOUND_DEST"
-cp "$SCRIPT_DIR/assets/notification.mp3" "$SOUND_DEST"
+cp "$SCRIPT_DIR/assets/message-new-instant.ogg" "$SOUND_DEST"
 manifest_note "RESTORED notification sound -> $SOUND_DEST"
 c_ok "notification sound in place"
 
