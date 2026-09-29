@@ -334,6 +334,7 @@ enabled = false
 
 [widget.todo]
 type = "nightwatch75/todo:todo"
+show_label = false
 
 [widget.tray]
 drawer = true
