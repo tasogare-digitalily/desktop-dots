@@ -426,6 +426,7 @@ hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("noctalia msg session lock"))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("noctalia msg panel-toggle wallpaper"))
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("noctalia msg screenshot-region"))
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("$HOME/.local/bin/music-applet")) -- ~/Git/music-applet, toggles
 
 
 
@@ -686,6 +687,17 @@ hl.window_rule({
         class = steam_app_1569580aw
     },
     confine_pointer = true,
+})
+
+-- music-applet (~/Git/music-applet): small floating now-playing window,
+-- shown on every workspace. Move/resize with SUPER + drag; it remembers where.
+hl.window_rule({
+    name = "music-applet",
+    match = { class = "^(dev\\.digitalily\\.MusicApplet)$" },
+    float = true,
+    pin = true,
+    size = { 300, 60 },
+    no_initial_focus = true,
 })
 
 -- noctalia

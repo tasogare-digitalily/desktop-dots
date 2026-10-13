@@ -6,7 +6,8 @@
 # invoke at runtime (including the Cozette font), plus the native Spotify + Spicetify +
 # Noctalia color-integration setup (spotify-launcher install, Comfy +
 # Colorful Spicetify themes, the noctalia community-template files that
-# drive live color updates). Meant to be run from inside a checked-out
+# drive live color updates), and the music-applet now-playing window
+# (~/Git/music-applet). Meant to be run from inside a checked-out
 # copy of this desktop-dots repo, after `git pull` has already synced
 # those dirs. Idempotent: safe to re-run, already-present pieces skipped.
 #
@@ -164,6 +165,7 @@ PACMAN_DESKTOP_PACKAGES=(
   brightnessctl playerctl wireplumber pavucontrol blueman   # hardware/media keybinds
   imagemagick libnotify wl-clipboard                        # waybar/scripts/colorpicker.sh
   pacman-contrib flatpak python                             # waybar custom modules
+  python-gobject gtk4                                       # music-applet (SUPER+P; also uses playerctl)
 )
 AUR_DESKTOP_PACKAGES=(
   xwaylandvideobridge opentabletdriver
@@ -290,6 +292,28 @@ spicetify config inject_css 1 replace_colors 1 overwrite_assets 1 inject_theme_j
 spicetify apply
 manifest_note "CONFIGURED spicetify: current_theme=Colorful color_scheme=noctalia"
 c_ok "spicetify configured and applied"
+
+# ---------- 8. music-applet ----------
+# Floating now-playing window bound to SUPER+P in hypr/hyprland.lua, colored
+# by the [theme.templates.user.music-applet] block in noctalia/config.toml.
+# Lives in its own repo; install.sh symlinks it into ~/.local/bin and
+# ~/.local/share/music-applet. Cloned from MUSIC_APPLET_REPO when there's no
+# checkout yet (override the env var to use a fork).
+MUSIC_APPLET_DIR="$HOME/Git/music-applet"
+MUSIC_APPLET_REPO="${MUSIC_APPLET_REPO:-https://github.com/tasogare-digitalily/music-applet}"
+if [ ! -d "$MUSIC_APPLET_DIR" ] && [ -n "$MUSIC_APPLET_REPO" ]; then
+  mkdir -p "$(dirname "$MUSIC_APPLET_DIR")"
+  clone_if_missing "$MUSIC_APPLET_REPO" "$MUSIC_APPLET_DIR" || true
+fi
+if [ -x "$MUSIC_APPLET_DIR/install.sh" ]; then
+  backup_path "$HOME/.local/bin/music-applet"
+  backup_path "$HOME/.local/share/music-applet/colors.css"
+  "$MUSIC_APPLET_DIR/install.sh"
+  manifest_note "INSTALLED music-applet from $MUSIC_APPLET_DIR"
+  c_ok "music-applet installed (renders its colors on the next noctalia palette change)"
+else
+  c_warn "music-applet: no checkout at $MUSIC_APPLET_DIR (clone from $MUSIC_APPLET_REPO failed or skipped) — skipping"
+fi
 
 manifest_note "=== bootstrap-desktop-parity.sh run completed successfully ==="
 c_ok "Done. Prior-state backups (if any existed) are kept at: $BACKUP_ROOT"

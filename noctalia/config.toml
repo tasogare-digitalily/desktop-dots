@@ -268,6 +268,11 @@ wallpaper_scheme = "vibrant"
         output_path = "$XDG_CONFIG_HOME/spicetify/Themes/Colorful/color.ini"
         post_hook = "bash '/home/digitalily/.local/state/noctalia/community-templates/spicetify/apply.sh'"
 
+        # ~/Git/music-applet; the running applet watches the output and recolors live.
+        [theme.templates.user.music-applet]
+        input_path = "/home/digitalily/.local/share/music-applet/colors.css"
+        output_path = "/home/digitalily/.cache/music-applet/colors.css"
+
 [wallpaper]
 directory = "/home/digitalily/wallpapers/walls"
 transition_on_startup = true
